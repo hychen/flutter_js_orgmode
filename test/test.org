@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       2854ecc3-920a-4604-bc14-24b47971707a
+:END:
+#+TITLE: LAO
+
+LAO 是 off-chain 的 Legal Entity，用於規範 [[https://a.com][DAO]] 成員的合法性。
+
+"hello"
+
+由 OpenLaw 發表。A For-Profit, Limited Liability Autonomous Organization
+* ID Link
+[[id:88c930cc-78eb-47f4-8f9a-e2af168e34f5][DAO]]

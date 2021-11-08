@@ -30,7 +30,7 @@ Use this package to
 ```dart
 import 'package:flutter_orgmode/flutter_orgmode.dart';
 
-final orgdata = Parser().parse(
+final orgdata = OrgParser().parse(
 """
 #+title: Dart
 * TODO [#A] Headline mei

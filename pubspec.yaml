@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_js: ^0.5.0+3
+  flutter_js_context: 
+    git: https://github.com/hychen/flutter_js_context.git
   json_annotation: ^4.3.0
 
 dev_dependencies:

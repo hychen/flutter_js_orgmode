@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_js/flutter_js.dart';
+import 'package:flutter_js_context/flutter_js_context.dart';
 
 import 'assets.dart';
 import 'greater_elements.dart' show OrgData;
@@ -19,11 +20,10 @@ import 'greater_elements.dart' show OrgData;
 /// Parser.parse(text).children[0].todoKeyword == 'TODO';
 /// ```
 class OrgParser {
-  /// The JavaScript runtime. It is JavaScriptCore on MacOS or iOS.
-  late JavascriptRuntime jsEngine;
+  JsContext context;
 
-  OrgParser() {
-    jsEngine = getJavascriptRuntime(xhr: false);
+  OrgParser() : context = JsContext() {
+    context.evaluate(jsBundle);
   }
 
   /// Parses [text] and returns [OrgData].
@@ -34,32 +34,15 @@ class OrgParser {
     // remove " append in the start and end position which make parsing incorrect.
     final strippedText = encodedText.substring(1, encodedText.length - 1);
     try {
-      await _tryLoadJsBundle();
-      var result = await jsEngine.evaluateAsync("""
+      var result = await context.evaluateAsync("""
       var processor = vendor.unified().use(vendor.parse);
       JSON.stringify(processor.parse('$strippedText'));
      """);
-      return OrgData.fromJson(json.decode(result.toString()));
+      return OrgData.fromJson(jsonDecode(result));
     } catch (e) {
       debugPrint(
           "The following text can not be parsed:\n $text \n failure:\n $e");
       return null;
     }
-  }
-
-  Future<void> _tryLoadJsBundle() async {
-    String bundleLoaded = jsEngine.evaluate("""
-    (typeof vendor === 'undefined') ? 0 : 1;
-    """).stringResult;
-    if (bundleLoaded == '0') {
-      await _loadJsBundle();
-    }
-  }
-
-  Future<void> _loadJsBundle() async {
-    jsEngine.evaluate("""
-    var window = global = globalThis;
-    """);
-    jsEngine.evaluate(jsBundle);
   }
 }

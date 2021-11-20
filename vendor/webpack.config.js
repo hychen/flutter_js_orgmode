@@ -6,7 +6,7 @@ module.exports = [{
   output: {
     libraryTarget: "var",
     library: 'vendor',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../assets/js/'),
     filename: 'bundle.js'
   },
 }]

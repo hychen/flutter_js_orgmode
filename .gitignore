@@ -75,4 +75,4 @@ build/
 !**/ios/**/default.perspectivev3
 
 # Node
-**/assets/js/node_modules/
+**/vendor/node_modules/

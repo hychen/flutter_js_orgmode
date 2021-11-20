@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_js/flutter_js.dart';
 
+import 'assets.dart';
 import 'greater_elements.dart' show OrgData;
 
 /// The OrgMode parser.
@@ -59,7 +60,6 @@ class OrgParser {
     jsEngine.evaluate("""
     var window = global = globalThis;
     """);
-    String jsBundle = await File('./assets/js/dist/bundle.js').readAsString();
     jsEngine.evaluate(jsBundle);
   }
 }

@@ -202,6 +202,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0+3"
+  flutter_js_asset:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "1694a2c96ab62855d65334bc217385e78380332b"
+      url: "https://github.com/hychen/flutter_js_asset.git"
+    source: git
+    version: "0.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:

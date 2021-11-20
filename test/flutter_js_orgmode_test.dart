@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:io';
-import 'package:flutter_orgmode/flutter_orgmode.dart';
+import 'package:flutter_js_orgmode/flutter_js_orgmode.dart';
 
 void main() {
   final parser = OrgParser();

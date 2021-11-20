@@ -28,7 +28,7 @@ Use this package to
 ## Usage
 
 ```dart
-import 'package:flutter_orgmode/flutter_orgmode.dart';
+import 'package:flutter_js_orgmode/flutter_js_orgmode.dart';
 
 final orgdata = OrgParser().parse(
 """

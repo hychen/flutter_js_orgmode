@@ -1,4 +1,4 @@
-library flutter_orgmode;
+library flutter_js_orgmode;
 
 export 'src/unist.dart';
 export 'src/greater_elements.dart';

@@ -34,6 +34,7 @@ abstract class Node {
 }
 
 @JsonSerializable()
+
 /// The location of a node in a source file.
 class Position {
   /// The first character of the parsed source region.
@@ -55,6 +56,7 @@ class Position {
 }
 
 @JsonSerializable()
+
 /// One place in a source file.
 class Point {
   /// (1-indexed integer) represents a line in a source file.

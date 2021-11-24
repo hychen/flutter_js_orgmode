@@ -6,7 +6,7 @@ import 'converter.dart';
 // - elements of their own type,
 // - node properties, which can only be found in property drawers,
 // - items, which can only be found in plain lists.
-abstract class GreaterElement extends Parent implements SerializableOrgNode{
+abstract class GreaterElement extends Parent implements SerializableOrgNode {
   abstract final int contentsBegin;
   abstract final int contentsEnd;
 }

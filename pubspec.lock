@@ -212,21 +212,17 @@ packages:
   flutter_js_asset:
     dependency: "direct dev"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "1694a2c96ab62855d65334bc217385e78380332b"
-      url: "https://github.com/hychen/flutter_js_asset.git"
-    source: git
-    version: "0.0.1"
+      name: flutter_js_asset
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   flutter_js_context:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "2131241a8fd4c4b6504ff80abc5460ed170e259a"
-      url: "https://github.com/hychen/flutter_js_context.git"
-    source: git
-    version: "0.0.1"
+      name: flutter_js_context
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:

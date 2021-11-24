@@ -1,5 +1,7 @@
 name: flutter_js_orgmode
-description: An Org Mode parser in Flutter apps.
+description: >
+  An Org Mode parser in Flutter apps which aims to parse accuracy via uniorg from JavaScript
+  ecosystem.
 version: 0.0.1
 homepage: https://github.com/hychen/flutter_js_orgmode
 
@@ -11,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_js: ^0.5.0+3
-  flutter_js_context: 
+  flutter_js_context:
     git: https://github.com/hychen/flutter_js_context.git
   json_annotation: ^4.3.0
 
@@ -21,7 +23,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner: ^2.1.4
   json_serializable: ^6.0.0
-  flutter_js_asset: 
+  flutter_js_asset:
     git: https://github.com/hychen/flutter_js_asset.git
 
 # For information on the generic Dart part of this file, see the

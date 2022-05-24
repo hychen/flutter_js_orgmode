@@ -45,4 +45,9 @@ class OrgParser {
       return null;
     }
   }
+
+  Future<T> parseType<T>(String text) async {
+    final OrgData? orgdata = await parse(text);
+    return orgdata?.children.whereType<T>().toList()[0] as T;
+  }
 }

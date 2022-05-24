@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "unified": "^10.1.0",
-    "uniorg": "^0.4.0",
-    "uniorg-parse": "^0.4.5"
+    "uniorg": "^0.5.2",
+    "uniorg-parse": "^0.5.2"
   }
 }

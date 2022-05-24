@@ -2,6 +2,8 @@
 /// described in org-mode syntax spec.
 library greater_element;
 
+import 'package:flutter/widgets.dart';
+import 'package:flutter_js_orgmode/flutter_js_orgmode.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'elements.dart';
@@ -118,6 +120,40 @@ class OrgSection extends GreaterElementMeta implements GreaterElement {
       _$OrgSectionFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$OrgSectionToJson(this);
+
+  List<OrgSection> get allSubSections =>
+      getSubSections(recursive: true).toList();
+
+  Iterable<OrgSection> getSubSections({recursive = false}) {
+    Iterable<OrgSection> aux(OrgSection section) {
+      final result = section.children.whereType<OrgSection>();
+      return recursive
+          ? result.followedBy(
+              result.map((e) => aux(e)).expand((element) => element))
+          : result;
+    }
+
+    return aux(this);
+  }
+
+  /// Returns the headline.
+  OrgHeadline get headline =>
+      children.firstWhere((element) => element is OrgHeadline);
+
+  /// Returns all headlines, includes the headlines in sub sections.
+  List<OrgHeadline> get allHeadlines => getHeadlines(recursive: true).toList();
+
+  Iterable<OrgHeadline> getHeadlines({bool recursive: false}) {
+    Iterable<OrgHeadline> getHeadlines(OrgSection section) {
+      Iterable<OrgHeadline> result = section.children.whereType<OrgHeadline>();
+      return (recursive & section.getSubSections().isNotEmpty)
+          ? result
+              .followedBy(section.getSubSections().map(getHeadlines).expand((e) => e))
+          : result;
+    }
+
+    return getHeadlines(this);
+  }
 }
 
 /// Drawer has the following pattern:

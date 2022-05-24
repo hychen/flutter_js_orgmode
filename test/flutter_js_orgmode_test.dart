@@ -19,4 +19,11 @@ void main() {
     expect(orgdata?.children[0].type, 'property-drawer');
     expect(orgdata?.children[1].type, 'keyword');
   });
+
+  test('parse sync', () {
+    var orgdata = parser.parseSync(
+        ':PROPERTIES:\n:ID:       2854ecc3-920a-4604-bc14-24b47971707a\n:END:\n#+title: LAO\n');
+    expect(orgdata?.children[0].type, 'property-drawer');
+    expect(orgdata?.children[1].type, 'keyword');
+  });
 }

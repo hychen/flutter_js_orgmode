@@ -77,6 +77,22 @@ class OrgData extends GreaterElementMeta implements GreaterElement {
   factory OrgData.fromJson(Map<String, dynamic> json) =>
       _$OrgDataFromJson(json);
   Map<String, dynamic> toJson() => _$OrgDataToJson(this);
+
+  List<OrgLink> getAllLinks() {
+    List<OrgLink> loop(lst){
+      List<OrgLink> result = [];
+      for(var element in lst) {
+        if(element is OrgLink) {
+          result.add(element);
+        }
+        else if(element is Parent && element.children.isNotEmpty ) {
+          result += loop(element.children);
+        }
+      }
+      return result;
+    }
+    return loop(children);
+  }
 }
 
 /// A [OrgSection] contains directly any [GreaterElement] or [OrgElement].

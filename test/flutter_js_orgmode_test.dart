@@ -26,4 +26,21 @@ void main() {
     expect(orgdata?.children[0].type, 'property-drawer');
     expect(orgdata?.children[1].type, 'keyword');
   });
+
+  test('getAllLinks', () {
+    final orgdata = parser.parseSync(
+"""
+#+title: title
+
+this is a [[https://a.com][link0]]
+
+* [[https://example.com][Headline Link 1]]
+- [[https://example.com][List-item Link 2]]
+
+...
+[fn:1] The link is: https://orgmode.org
+""");
+    final links = orgdata!.getAllLinks();
+    expect(links.length, 4);
+  });
 }

@@ -99,36 +99,36 @@ class OrgData extends GreaterElementMeta implements GreaterElement {
     for (var e in children) {
       if (e is OrgKeyword) {
         switch (e.key.toLowerCase()) {
-          case('title'):
-            if(title != null) {
+          case ('title'):
+            if (title != null) {
               title = title.toString() + e.value;
             } else {
               title = e.value;
             }
             break;
-          case('author'):
+          case ('author'):
             author = e.value;
             break;
-          case('date'):
+          case ('date'):
             date = e.value;
             break;
-          case('category'):
+          case ('category'):
             category = e.value;
             break;
-          case('filetags'):
+          case ('filetags'):
             filetags = e.value.split(' ');
             break;
-          case('tags'):
-            if(tags.isNotEmpty) {
+          case ('tags'):
+            if (tags.isNotEmpty) {
               tags += e.value.split(' ');
             } else {
               tags = e.value.split(' ');
             }
             break;
-          }
-        } else if (e is OrgPropertyDrawer) {
-          properties = e;
         }
+      } else if (e is OrgPropertyDrawer) {
+        properties = e;
+      }
     }
   }
 
@@ -294,6 +294,23 @@ class OrgPropertyDrawer extends GreaterElementMeta implements GreaterElement {
       _$OrgPropertyDrawerFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$OrgPropertyDrawerToJson(this);
+
+  /// Get the value of a property by given [key].
+  String? get(String key) {
+    try {
+      return children.singleWhere((element) => element.key == key).value;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Lookup the values of a property by given [key].
+  List<String> lookup(String key) {
+    return children
+        .where((element) => element.key == key)
+        .map((e) => e.value)
+        .toList();
+  }
 }
 
 /// A set of consecutive items of the same indentation.

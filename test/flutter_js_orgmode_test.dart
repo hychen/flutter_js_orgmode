@@ -51,13 +51,13 @@ this is a [[https://a.com][link0]]
 :ID: 123234
 :END:
 #+title: title
-#+author: hY
+#+author: hy
 #+date: 2022-02-11
 #+filetags: tag1 tag2 tag3
 #+tags: tag1 tag2
 #+tags: tag3
 """);
-    expect(orgdata?.properties?.children[0].value, '123234');
+    expect(orgdata?.properties?.get('ID'), '123234');
     expect(orgdata?.title, "title");
     expect(orgdata?.author, "hy");
     expect(orgdata?.date, "2022-02-11");

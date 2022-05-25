@@ -68,29 +68,87 @@ class OrgData extends GreaterElementMeta implements GreaterElement {
   @NodeListConverter()
   final List children;
 
+  /// Org displays this title. For long titles, use multiple ‘#+TITLE’ lines.
+  String? title;
+
+  String? author;
+
+  String? date;
+
+  /// The category of the agenda file, which applies to the entire document.
+  String? category;
+
+  /// The tags that all entries in the file inherit from, including the
+  /// top-level entries.
+  List<String> filetags = [];
+
+  /// The valid tags in this file, and (potentially) the corresponding fast
+  /// tag selection keys.
+  List<String> tags = [];
+
+  ///The limits and the default for the priorities. All three must be either
+  ///letters A–Z or numbers 0–9. The highest priority must have a lower ASCII
+  ///number than the lowest priority.
+  OrgPropertyDrawer? properties;
+
   OrgData(
       {required int contentsBegin,
       required int contentsEnd,
       required this.children})
-      : super(contentsBegin, contentsEnd);
+      : super(contentsBegin, contentsEnd) {
+    for (var e in children) {
+      if (e is OrgKeyword) {
+        switch (e.key.toLowerCase()) {
+          case('title'):
+            if(title != null) {
+              title = title.toString() + e.value;
+            } else {
+              title = e.value;
+            }
+            break;
+          case('author'):
+            author = e.value;
+            break;
+          case('date'):
+            date = e.value;
+            break;
+          case('category'):
+            category = e.value;
+            break;
+          case('filetags'):
+            filetags = e.value.split(' ');
+            break;
+          case('tags'):
+            if(tags.isNotEmpty) {
+              tags += e.value.split(' ');
+            } else {
+              tags = e.value.split(' ');
+            }
+            break;
+          }
+        } else if (e is OrgPropertyDrawer) {
+          properties = e;
+        }
+    }
+  }
 
   factory OrgData.fromJson(Map<String, dynamic> json) =>
       _$OrgDataFromJson(json);
   Map<String, dynamic> toJson() => _$OrgDataToJson(this);
 
   List<OrgLink> getAllLinks() {
-    List<OrgLink> loop(lst){
+    List<OrgLink> loop(lst) {
       List<OrgLink> result = [];
-      for(var element in lst) {
-        if(element is OrgLink) {
+      for (var element in lst) {
+        if (element is OrgLink) {
           result.add(element);
-        }
-        else if(element is Parent && element.children.isNotEmpty ) {
+        } else if (element is Parent && element.children.isNotEmpty) {
           result += loop(element.children);
         }
       }
       return result;
     }
+
     return loop(children);
   }
 }
@@ -163,8 +221,8 @@ class OrgSection extends GreaterElementMeta implements GreaterElement {
     Iterable<OrgHeadline> getHeadlines(OrgSection section) {
       Iterable<OrgHeadline> result = section.children.whereType<OrgHeadline>();
       return (recursive & section.getSubSections().isNotEmpty)
-          ? result
-              .followedBy(section.getSubSections().map(getHeadlines).expand((e) => e))
+          ? result.followedBy(
+              section.getSubSections().map(getHeadlines).expand((e) => e))
           : result;
     }
 

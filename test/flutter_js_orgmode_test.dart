@@ -42,5 +42,6 @@ this is a [[https://a.com][link0]]
 """);
     final links = orgdata!.getAllLinks();
     expect(links.length, 4);
+    expect(links[0].name, 'link0');
   });
 }

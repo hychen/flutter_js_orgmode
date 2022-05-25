@@ -2,6 +2,7 @@
 /// described in org-mode syntax spec.
 library objects;
 
+import 'package:flutter_js_orgmode/flutter_js_orgmode.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'converter.dart';
@@ -301,6 +302,10 @@ class OrgLink extends OrgObjectTpl implements RecursiveObject {
 
   /// The reset part of this link without protocol.
   final String path;
+
+  /// The name of this link.
+  String get name =>
+      (children.singleWhere((element) => element is OrgText) as OrgText).value;
 
   OrgLink(
       {int? contentsBegin,
